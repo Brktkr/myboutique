@@ -82,13 +82,27 @@ class _CategoryEditScreenState extends State<CategoryEditScreen> {
     });
     for (int i = 0; i < _subs.length; i++) {
       final sub = _subs[i];
-      await _viewModel.updateSubCategory(sub['id'], {
-        'name': _subNameControllers[i].text,
-        'desc': _subDescControllers[i].text,
-        'isActive': _subActive[i],
-        'updatedBy': userId,
-        'updatedAt': DateTime.now(),
-      });
+      if (sub['id'] != null && sub['id'].toString().isNotEmpty) {
+        await _viewModel.updateSubCategory(sub['id'], {
+          'name': _subNameControllers[i].text,
+          'desc': _subDescControllers[i].text,
+          'isActive': _subActive[i],
+          'updatedBy': userId,
+          'updatedAt': DateTime.now(),
+        });
+      } else {
+        await _viewModel.subCategoryService.subCatRef.add({
+          'parentCatId': widget.category['id'],
+          'name': _subNameControllers[i].text,
+          'desc': _subDescControllers[i].text,
+          'isActive': _subActive[i],
+          'createdAt': DateTime.now(),
+          'updatedAt': DateTime.now(),
+          'createdBy': userId,
+          'updatedBy': userId,
+          'isDeleted': false,
+        });
+      }
     }
     if (mounted) Navigator.of(context).pop(true);
   }

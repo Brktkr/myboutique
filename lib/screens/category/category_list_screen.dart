@@ -33,8 +33,8 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
-          if (!snapshot.hasData) {
-            return const Center(child: Text('Veri yok.'));
+          if (!snapshot.hasData || (snapshot.data?.isEmpty ?? true)) {
+            return const Center(child: Text('Kategori bilgisi bulunamadı.'));
           }
           final items = snapshot.data!;
           final categories = items.where((e) => e['parentCatId'] == null).toList();
@@ -127,7 +127,12 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text(sub['name'] ?? '', style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15, color: Colors.blueGrey)),
+                                      Text(
+                                        sub['name'] != null && (sub['desc'] ?? '').toString().trim().isNotEmpty
+                                            ? '${sub['name']} (${sub['desc']})'
+                                            : (sub['name'] ?? ''),
+                                        style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15, color: Colors.blueGrey),
+                                      ),
                                       Row(
                                         children: [
                                           const Text('Oluşturma tarihi: ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Colors.black54)),
