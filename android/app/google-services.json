@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "500788649101",
+    "project_id": "brktkrproject1",
+    "storage_bucket": "brktkrproject1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:500788649101:android:8b2cbf4adf43979b9516c4",
+        "android_client_info": {
+          "package_name": "com.example.myboutique"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPtOorwOdZFkhABJIvOGaUolC6PmF3MyY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
